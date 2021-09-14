@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-
+body{
+    min-height: 100%;
+    padding:74px 0 52px 0 !important;
+}
 /* login module */
-/* #login{ */
-    /* background-image: url(./assets/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg); */
-    /* background-position: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: cadetblue;
+#login{
     min-height:900px;
-} */
+    margin-top:10rem !important;
+}
+#login input,#login button{
+    width:80%;
+}
