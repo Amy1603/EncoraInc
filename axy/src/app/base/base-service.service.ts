@@ -1,15 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from "@angular/common/http";
-
-export interface Config{
-  status?: boolean,
-  message?: string,
-  token?:string,
-  data?:any,
-  error?:string,
-  expiresIn?:number
-}
-
 @Injectable({
   providedIn: 'root'
 })
