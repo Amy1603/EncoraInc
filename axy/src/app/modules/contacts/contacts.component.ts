@@ -106,6 +106,7 @@ save(){
     */
 addForm(){
   this.saveFlag = "add";
+  this.contactForm.reset();
   // this.contactForm.controls.name.setValidators(Validators.required);
   // this.contactForm.controls.country.setValidators(Validators.required);
   // this.contactForm.controls.phone.setValidators(Validators.required);
