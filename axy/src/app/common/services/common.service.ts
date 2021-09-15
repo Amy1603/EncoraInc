@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CommonService {
   loadingRequest = new BehaviorSubject(false);
+  showHeader = new BehaviorSubject(true);
   private timeout: any;
 
   setLoading(val: boolean): void {
@@ -19,4 +20,7 @@ export class CommonService {
     }
   }
 
+  headerStatus(val:boolean){
+    this.showHeader.next(val);
+  }
 }

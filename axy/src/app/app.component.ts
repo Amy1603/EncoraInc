@@ -10,6 +10,7 @@ import { CommonService } from './common/services/common.service';
 export class AppComponent implements OnInit{
   title = 'axy';
   public showLoader: boolean = false;
+  showheader: boolean = true;
 
   constructor(private commonService:CommonService,private router:Router){
     router.events.subscribe((event: RouterEvent) => {
@@ -20,6 +21,9 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.commonService.loadingRequest.subscribe((val: boolean) => {
       this.showLoader = val;
+    });
+    this.commonService.showHeader.subscribe((val: boolean) => {
+      this.showheader = val;
     });
   }
   // Function to display loader when lazily loaded module chunk loads

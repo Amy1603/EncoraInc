@@ -10,11 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { LoginModule } from './modules/login/login.module';
+import { NotFoundComponent } from './common/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    NotFoundComponent,
+    
   ],
   imports: [
     BrowserModule,

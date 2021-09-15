@@ -1,5 +1,5 @@
 
-<app-header></app-header>
+<app-header *ngIf="showheader"></app-header>
 <router-outlet>
     <div class="spinner-wrapper" *ngIf="showLoader">
         <div class="spinner-border text-primary"></div>
