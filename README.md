@@ -1,2 +1,0 @@
-# EncoraInc
-Assessment
