@@ -43,6 +43,9 @@ body{
     position:absolute;
     bottom:10%;
 }
+.company{
+    margin-bottom:6rem;
+}
 /* contacts module */
 #contacts{
     min-height:1000px;
