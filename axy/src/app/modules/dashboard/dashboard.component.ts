@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common/services/common.service';
+import { Constants } from 'src/app/common/constants';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,9 +13,11 @@ import { CommonService } from 'src/app/common/services/common.service';
 export class DashboardComponent implements OnInit,OnDestroy {
   unsubscribe$ = new Subject<void>();
   companiesData: any = [];
+  labels: any;
   constructor(private dashboardService:DashboardService,private router:Router,private commonService:CommonService) { }
 
   ngOnInit() {
+    this.labels = Constants.dashboardConstants;
     this.getCompaniesData();
   }
   /*
@@ -23,15 +26,12 @@ export class DashboardComponent implements OnInit,OnDestroy {
     *   parameters : none
     */
   getCompaniesData(){
-    this.commonService.display(true);
       this.dashboardService.getCompaniesData().pipe(takeUntil(this.unsubscribe$)).subscribe(response=>{
         if(response){
-          this.commonService.display(false);
           this.companiesData = (<any>response);
       }
     },
     err => {
-      this.commonService.display(false);
       console.log('Error in fetching Companies Data');
     }
     );

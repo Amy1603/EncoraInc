@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContactsService } from './contacts.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/common/services/common.service';
+import { Constants } from 'src/app/common/constants';
 
 @Component({
   selector: 'app-contacts',
@@ -16,9 +17,12 @@ export class ContactsComponent implements OnInit,OnDestroy {
   contactForm:FormGroup
   editedIndex: number;
   saveFlag: string = "add";
+  labels: any;
+  showErrors: boolean = false;
   constructor(private contactsService:ContactsService,private fb:FormBuilder,private commonService:CommonService) { }
 
   ngOnInit(): void {
+    this.labels = Constants.contactsConstants;
     this.getContactsData();
     this.createForm();
   }
@@ -28,15 +32,12 @@ export class ContactsComponent implements OnInit,OnDestroy {
     *   parameters : none
     */
   getContactsData(){
-    this.commonService.display(true);
     this.contactsService.getContactsData().pipe(takeUntil(this.unsubscribe$)).subscribe(response=>{
       if(response){
-        this.commonService.display(false);
         this.contactsData = (<any>response);
     }
   },
   err => {
-    this.commonService.display(false);
     console.log('Error in fetching Companies Data');
   }
   );
@@ -86,12 +87,17 @@ save(){
     this.contactsData.splice(this.editedIndex,1,editedContactData);
     this.contactForm.reset();
   }else{
-    let contactData = this.contactForm.value;
-    // contactData.id = this.contactsData.lenth;
-    this.contactsData.push(contactData);
+    // if(this.contactForm.valid){
+      let contactData = this.contactForm.value;
+      if(contactData.name && contactData.country&& contactData.phone) this.contactsData.push(contactData);
+      else this.showErrors = true;
+      setTimeout(()=>{
+        this.showErrors = false;
+      },5000);
+    // }else{
+    //   this.showErrors = true;
+    // }
   }
-  
-  
 }
 /*
     *   function name: addForm()
@@ -100,8 +106,15 @@ save(){
     */
 addForm(){
   this.saveFlag = "add";
+  // this.contactForm.controls.name.setValidators(Validators.required);
+  // this.contactForm.controls.country.setValidators(Validators.required);
+  // this.contactForm.controls.phone.setValidators(Validators.required);
+  // this.contactForm.controls.name.updateValueAndValidity();
+  // this.contactForm.controls.country.updateValueAndValidity();
+  // this.contactForm.controls.phone.updateValueAndValidity();
 }
-  ngOnDestroy(){
+
+ngOnDestroy(){
     if(this.unsubscribe$){
       this.unsubscribe$.next();
       this.unsubscribe$.complete();

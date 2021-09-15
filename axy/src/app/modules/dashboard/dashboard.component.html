@@ -1,15 +1,15 @@
-<div id="dashboard" class="container-fluid">
+<div id="dashboard" class="container">
   <div class="d-flex justify-content-center">
-    <h1 class="text-dark my-4">Company Details</h1>
+    <h1 class="text-dark my-4">{{this.labels.title}}</h1>
   </div>
   <div class="row mt-4">
     <div class="col-md-4 col-12 mb-2" *ngFor="let company of companiesData">
-      <div class="card border rounded shadow" style="width:400px">
-        <img class="card-img-top" [src]="company.logo" alt="Not Found">
+      <div class="card shadow-sm">
+        <!-- <img class="card-img-top" [src]="company.logo" alt="Not Found"> -->
         <div class="card-body">
           <h4 class="card-title">{{company.name}}</h4>
           <p class="card-text">{{company.description}}</p>
-          <button class="btn btn-primary" (click)="navigateTo()">Contacts Details</button>
+          <button class="btn btn-primary" (click)="navigateTo()">{{this.labels.title}}</button>
         </div>
       </div>
     </div>

@@ -5,12 +5,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
-  public isLoader: boolean;
-  public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor() { }
-  
-  display(value: boolean) {
-    this.isLoader = value;
-    this.status.next(value);
-}
+  loadingRequest = new BehaviorSubject(false);
+  private timeout: any;
+
+  setLoading(val: boolean): void {
+    if (!val) {
+      this.timeout = setTimeout(() => {
+        this.loadingRequest.next(val);
+      }, 300);
+    } else {
+      clearTimeout(this.timeout);
+      this.loadingRequest.next(val);
+    }
+  }
+
 }

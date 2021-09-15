@@ -1,6 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
+
 <app-header></app-header>
 <router-outlet>
-    <div [hidden]="!showLoader" class="k-i-loading"></div>
+    <div class="spinner-wrapper" *ngIf="showLoader">
+        <div class="spinner-border text-primary"></div>
+    </div>
 </router-outlet>
 <!-- <app-footer></app-footer> -->

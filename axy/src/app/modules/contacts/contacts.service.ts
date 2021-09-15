@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from 'src/app/base/base-service.service';
 import { RestServiceConstants } from 'src/app/common/rest-service-constants';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ContactsService extends BaseService{
 
   constructor(private http:HttpClient) {
