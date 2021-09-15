@@ -3,6 +3,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContactsService } from './contacts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/common/services/common.service';
 
 @Component({
   selector: 'app-contacts',
@@ -15,7 +16,7 @@ export class ContactsComponent implements OnInit,OnDestroy {
   contactForm:FormGroup
   editedIndex: number;
   saveFlag: string = "add";
-  constructor(private contactsService:ContactsService,private fb:FormBuilder) { }
+  constructor(private contactsService:ContactsService,private fb:FormBuilder,private commonService:CommonService) { }
 
   ngOnInit(): void {
     this.getContactsData();
@@ -27,12 +28,15 @@ export class ContactsComponent implements OnInit,OnDestroy {
     *   parameters : none
     */
   getContactsData(){
+    this.commonService.display(true);
     this.contactsService.getContactsData().pipe(takeUntil(this.unsubscribe$)).subscribe(response=>{
       if(response){
+        this.commonService.display(false);
         this.contactsData = (<any>response);
     }
   },
   err => {
+    this.commonService.display(false);
     console.log('Error in fetching Companies Data');
   }
   );

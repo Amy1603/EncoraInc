@@ -29,7 +29,7 @@ export class LoginService extends BaseService{
     *   functionality: clear auth token
     *   parameters : none
     */
-  private clearAuthData(){
+   clearAuthData(){
       localStorage.removeItem('authToken');
       localStorage.removeItem('authStatus');
   }

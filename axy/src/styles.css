@@ -3,6 +3,11 @@ body{
     min-height: 100%;
     padding:74px 0 52px 0 !important;
 }
+/* loader */
+.k-i-loading {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #58ba47 !important;
+  }
 /* login module */
 #login{
     min-height:900px;
@@ -11,6 +16,7 @@ body{
 #login input,#login button{
     width:80%;
 }
+/* contacts module */
 #add-contacts{
     width:10%;
 }

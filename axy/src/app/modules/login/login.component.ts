@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/common/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   unsubscribe$ = new Subject<void>();
   loginForm:FormGroup;
   invalidUser: boolean = false;
-  constructor(private loginService:LoginService,private fb:FormBuilder,private router:Router) { }
+  constructor(private loginService:LoginService,private fb:FormBuilder,private router:Router,private commonService:CommonService) { }
 
   ngOnInit() {
     this.createForm();
@@ -37,9 +38,11 @@ export class LoginComponent implements OnInit,OnDestroy {
     */
   login(){
     if(this.loginForm.valid){
+      this.commonService.display(true);
       let email = this.loginForm.value.email;
       this.loginService.getUserdata().pipe(takeUntil(this.unsubscribe$)).subscribe(response=>{
         if(response){
+          this.commonService.display(false);
           let data = (<any>response);
           // since we have dummy data verifying user using email id and setting random token from frontend itself.
           data.forEach(user=>{
@@ -56,6 +59,7 @@ export class LoginComponent implements OnInit,OnDestroy {
         }
       },
       err => {
+        this.commonService.display(false);
         console.log('Error in fetching User Data');
       });
     }
